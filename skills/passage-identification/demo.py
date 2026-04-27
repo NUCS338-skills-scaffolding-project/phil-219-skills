@@ -6,17 +6,24 @@ from logic import run
 
 def main():
     print("=== Passage Identification — Demo ===")
-    print("Type your message, or 'quit' to exit.")
+    print("Type your message (press Enter twice to send), or 'quit' to exit.")
     print("Use '/text <text>' to load the course text the tutor can draw passages from.\n")
 
     conversation_history = []
     passage_context = ""
 
     while True:
-        student_input = input("You: ").strip()
-        if student_input.lower() in ("quit", "exit", "q"):
-            print("Goodbye!")
-            break
+        print("You: ", end="", flush=True)
+        lines = []
+        while True:
+            line = input()
+            if line.lower() in ("quit", "exit", "q"):
+                print("Goodbye!")
+                return
+            if line == "" and lines:
+                break
+            lines.append(line)
+        student_input = "\n".join(lines).strip()
         if not student_input:
             continue
 
