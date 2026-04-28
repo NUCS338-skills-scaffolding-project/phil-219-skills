@@ -33,17 +33,24 @@ def _extract_pdf(path: str) -> str:
         return ""
     try:
         reader = PdfReader(path)
-        chunks = []
-        for page in reader.pages:
-            try:
-                text = page.extract_text() or ""
-            except Exception:
-                text = ""
-            if text:
-                chunks.append(text)
-        return "\n\n".join(chunks)
     except Exception:
         return ""
+
+    chunks = []
+    for page in reader.pages:
+        text = ""
+        try:
+            text = page.extract_text() or ""
+        except Exception:
+            text = ""
+        if not text.strip():
+            try:
+                text = page.extract_text(extraction_mode="layout") or ""
+            except Exception:
+                pass
+        if text.strip():
+            chunks.append(text)
+    return "\n\n".join(chunks)
 
 
 def write_text_cache(text_path: str, text: str) -> None:

@@ -175,6 +175,24 @@ def add_chat_file(chat_id: str, file_meta: Dict[str, Any]) -> Optional[Dict[str,
         return None
 
 
+def update_chat_file(chat_id: str, file_id: str, **fields: Any) -> Optional[Dict[str, Any]]:
+    allowed = {"label", "has_text"}
+    with _lock:
+        state = _load_chats()
+        for c in state["chats"]:
+            if c["id"] != chat_id:
+                continue
+            for f in c.get("files", []):
+                if f["id"] == file_id:
+                    for k, v in fields.items():
+                        if k in allowed:
+                            f[k] = v
+                    c["updated_at"] = _now_iso()
+                    _save_chats(state)
+                    return f
+        return None
+
+
 def remove_chat_file(chat_id: str, file_id: str) -> bool:
     with _lock:
         state = _load_chats()
@@ -234,7 +252,7 @@ def get_folder_file(file_id: str) -> Optional[Dict[str, Any]]:
 
 
 def update_folder_file(file_id: str, **fields: Any) -> Optional[Dict[str, Any]]:
-    allowed = {"label"}
+    allowed = {"label", "has_text"}
     with _lock:
         state = _load_folder()
         for f in state.get("files", []):

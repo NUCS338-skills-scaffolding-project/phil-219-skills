@@ -11,11 +11,11 @@ from __future__ import annotations
 
 import os
 import re
-from typing import Any, Dict, List, Optional, Tuple
+from typing import Any, Dict, List, Optional
 
 from backend.config import FILES_DIR, MAX_PASSAGE_CHARS
 from backend.services import storage
-from backend.services.pdf_extract import read_text_cache
+from backend.services.pdf_extract import extract_text, read_text_cache, write_text_cache
 from backend.services.skill_detector import detect_skill
 from backend.services.skill_registry import all_skills, get_skill
 
@@ -32,13 +32,44 @@ def _is_no(text: str) -> bool:
     return bool(_NO_PATTERN.match(text.strip()))
 
 
-def _file_text(file_id: str, label: Optional[str] = None) -> str:
+def _file_text(file_id: str, label: Optional[str] = None, disk_name: Optional[str] = None) -> str:
+    """Return the cached extracted text for a file, re-extracting on the fly
+    if the cache is empty (e.g. an upload made before pypdf was installed).
+    """
     text_path = os.path.join(FILES_DIR, f"{file_id}.txt")
     text = read_text_cache(text_path) or ""
+    if not text and disk_name:
+        raw_path = os.path.join(FILES_DIR, disk_name)
+        if os.path.isfile(raw_path):
+            text = extract_text(raw_path) or ""
+            if text:
+                write_text_cache(text_path, text)
     if not text:
         return ""
     header = f"=== {label or file_id} ===\n"
     return header + text
+
+
+def _refresh_has_text_flags(chat_id: str) -> None:
+    """If a file's text cache exists but its has_text flag is False (e.g. it
+    was extracted lazily this turn), update the metadata so the UI reflects
+    the change."""
+    chat = storage.get_chat(chat_id)
+    if not chat:
+        return
+    for f in chat.get("files", []):
+        if f.get("has_text"):
+            continue
+        cached = read_text_cache(os.path.join(FILES_DIR, f"{f['id']}.txt"))
+        if cached:
+            storage.update_chat_file(chat_id, f["id"], has_text=True)
+    for gf_id in chat.get("folder_pins", []):
+        gmeta = storage.get_folder_file(gf_id)
+        if not gmeta or gmeta.get("has_text"):
+            continue
+        cached = read_text_cache(os.path.join(FILES_DIR, f"{gf_id}.txt"))
+        if cached:
+            storage.update_folder_file(gf_id, has_text=True)
 
 
 def _build_passage_context(chat: Dict[str, Any], message_file_ids: List[str]) -> str:
@@ -48,40 +79,75 @@ def _build_passage_context(chat: Dict[str, Any], message_file_ids: List[str]) ->
 
     chat_files = {f["id"]: f for f in chat.get("files", [])}
 
-    for fid in message_file_ids:
+    def add(fid: str, meta: Dict[str, Any]) -> None:
         if fid in seen:
-            continue
-        meta = chat_files.get(fid)
-        if not meta:
-            continue
-        chunk = _file_text(fid, meta.get("label") or meta.get("filename"))
+            return
+        chunk = _file_text(
+            fid,
+            meta.get("label") or meta.get("filename"),
+            meta.get("disk_name"),
+        )
         if chunk:
             pieces.append(chunk)
             seen.add(fid)
+
+    for fid in message_file_ids:
+        meta = chat_files.get(fid)
+        if meta:
+            add(fid, meta)
 
     for fid, meta in chat_files.items():
-        if fid in seen:
-            continue
-        chunk = _file_text(fid, meta.get("label") or meta.get("filename"))
-        if chunk:
-            pieces.append(chunk)
-            seen.add(fid)
+        add(fid, meta)
 
     for gf_id in chat.get("folder_pins", []):
-        if gf_id in seen:
-            continue
         meta = storage.get_folder_file(gf_id)
-        if not meta:
-            continue
-        chunk = _file_text(gf_id, meta.get("label") or meta.get("filename"))
-        if chunk:
-            pieces.append(chunk)
-            seen.add(gf_id)
+        if meta:
+            add(gf_id, meta)
 
     blob = "\n\n".join(pieces)
     if len(blob) > MAX_PASSAGE_CHARS:
         blob = blob[:MAX_PASSAGE_CHARS] + "\n\n[...truncated...]"
     return blob
+
+
+def _attached_file_summary(chat: Dict[str, Any]) -> str:
+    """Short list of every document the assistant has access to in this chat,
+    so the LLM never claims it 'cannot access uploads' when files exist.
+    """
+    items: List[str] = []
+    for f in chat.get("files", []):
+        flag = "" if f.get("has_text") else " (text not extractable — likely scanned/image PDF)"
+        items.append(f"- {f.get('label') or f.get('filename')}{flag}")
+    for gf_id in chat.get("folder_pins", []):
+        meta = storage.get_folder_file(gf_id)
+        if not meta:
+            continue
+        flag = "" if meta.get("has_text") else " (text not extractable)"
+        items.append(f"- {meta.get('label') or meta.get('filename')} [pinned from Shared Folder]{flag}")
+    return "\n".join(items)
+
+
+def _resolve_passage_context(chat_id: str, message_file_ids: List[str]) -> str:
+    """Build the full text the skill receives, including a header listing
+    every document the user has uploaded for this chat. The list itself
+    matters because skills should reference docs by the user's labels,
+    and because it prevents the LLM from claiming it cannot see uploads.
+    """
+    chat = storage.get_chat(chat_id) or {}
+    body = _build_passage_context(chat, message_file_ids)
+    _refresh_has_text_flags(chat_id)
+    chat = storage.get_chat(chat_id) or chat
+
+    summary = _attached_file_summary(chat)
+    parts: List[str] = []
+    if summary:
+        parts.append(
+            "Documents the student has uploaded for this chat (refer to them "
+            "by their labels):\n" + summary
+        )
+    if body:
+        parts.append(body)
+    return "\n\n".join(parts)
 
 
 def _conversation_for_skill(messages: List[Dict[str, Any]]) -> List[Dict[str, str]]:
@@ -179,7 +245,7 @@ def handle_user_message(
             chat = storage.update_chat(chat_id, active_skill=pending, pending_skill=None) or chat
             history_excl_current = chat.get("messages", [])[:-1]
             last_student_message = _last_substantive_student_message(history_excl_current) or content
-            passage_context = _build_passage_context(chat, file_ids)
+            passage_context = _resolve_passage_context(chat_id, file_ids)
             assistant_text = _invoke_skill(
                 pending,
                 last_student_message,
@@ -195,7 +261,7 @@ def handle_user_message(
             state_change = {"pending_skill": None}
         else:
             history_excl_current = chat.get("messages", [])[:-1]
-            passage_context = _build_passage_context(chat, file_ids)
+            passage_context = _resolve_passage_context(chat_id, file_ids)
             chat = storage.update_chat(chat_id, active_skill=pending, pending_skill=None) or chat
             assistant_text = _invoke_skill(
                 pending,
@@ -207,7 +273,7 @@ def handle_user_message(
 
     elif active:
         history_excl_current = chat.get("messages", [])[:-1]
-        passage_context = _build_passage_context(chat, file_ids)
+        passage_context = _resolve_passage_context(chat_id, file_ids)
         assistant_text = _invoke_skill(
             active,
             content,
