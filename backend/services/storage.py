@@ -76,6 +76,7 @@ def list_chats() -> List[Dict[str, Any]]:
                 "updated_at": c.get("updated_at", c.get("created_at")),
                 "active_skill": c.get("active_skill"),
                 "pending_skill": c.get("pending_skill"),
+                "skill_candidates": c.get("skill_candidates"),
                 "message_count": len(c.get("messages", [])),
             }
             for c in sorted(
@@ -104,6 +105,7 @@ def create_chat(title: str = "New chat") -> Dict[str, Any]:
             "updated_at": _now_iso(),
             "active_skill": None,
             "pending_skill": None,
+            "skill_candidates": None,
             "messages": [],
             "files": [],
             "folder_pins": [],
@@ -126,7 +128,7 @@ def delete_chat(chat_id: str) -> bool:
 
 def update_chat(chat_id: str, **fields: Any) -> Optional[Dict[str, Any]]:
     """Patch top-level fields on a chat (title, active_skill, pending_skill, folder_pins)."""
-    allowed = {"title", "active_skill", "pending_skill", "folder_pins"}
+    allowed = {"title", "active_skill", "pending_skill", "skill_candidates", "folder_pins"}
     with _lock:
         state = _load_chats()
         for c in state["chats"]:
