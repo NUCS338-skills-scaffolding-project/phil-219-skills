@@ -12,9 +12,6 @@ from skills.shared.llm_client import call_llm
 from backend.services.skill_registry import all_skills, get_skill
 
 
-# Curated keyword bags. Phrases are matched as substrings (case-insensitive)
-# and weighted; single-word tokens are matched as whole words with a lower
-# weight to avoid false positives.
 SKILL_KEYWORDS: Dict[str, Dict[str, List[str]]] = {
     "passage-identification": {
         "phrases": [
@@ -128,30 +125,25 @@ def _score(text: str, bag: Dict[str, List[str]]) -> int:
     return score
 
 
-def _keyword_detect(message: str) -> Tuple[Optional[str], int, int]:
-    """Return (best_skill_id, top_score, runner_up_score)."""
+def _keyword_scores(message: str) -> List[Tuple[str, int]]:
+    """Return all skills sorted by keyword score descending."""
     scored: List[Tuple[str, int]] = []
     for skill in all_skills():
         bag = SKILL_KEYWORDS.get(skill.id, {})
         scored.append((skill.id, _score(message, bag)))
     scored.sort(key=lambda x: x[1], reverse=True)
-    if not scored:
-        return None, 0, 0
-    top_id, top_score = scored[0]
-    runner = scored[1][1] if len(scored) > 1 else 0
-    return top_id, top_score, runner
+    return scored
 
 
 def _llm_classify(message: str, history: List[Dict[str, str]]) -> Optional[str]:
-    """Ask the LLM to pick the best-fitting skill. Returns a folder id or None."""
+    """Ask the LLM to pick the single best-fitting skill. Returns a skill id or None."""
     skills = all_skills()
     if not skills:
         return None
-    catalog_lines = []
-    for s in skills:
-        catalog_lines.append(f"- id: {s.id} | name: {s.name} | description: {s.short_description()}")
-    catalog = "\n".join(catalog_lines)
-
+    catalog = "\n".join(
+        f"- id: {s.id} | name: {s.name} | description: {s.short_description()}"
+        for s in skills
+    )
     system = (
         "You classify a student's message into one of the available "
         "Socratic teaching skills. Read the message and pick the single "
@@ -160,18 +152,15 @@ def _llm_classify(message: str, history: List[Dict[str, str]]) -> Optional[str]:
         "the listed ids, or null if none clearly fits.\n\nCatalog:\n"
         f"{catalog}"
     )
-
-    convo = []
-    for turn in history[-6:]:
-        role = "user" if turn.get("role") == "user" else "assistant"
-        convo.append({"role": role, "content": turn.get("content", "")})
+    convo = [
+        {"role": "user" if t.get("role") == "user" else "assistant", "content": t.get("content", "")}
+        for t in history[-6:]
+    ]
     convo.append({"role": "user", "content": f"Student message:\n{message}"})
-
     try:
         raw = call_llm(system, convo)
     except Exception:
         return None
-
     match = re.search(r"\{[^}]*\}", raw or "")
     if not match:
         return None
@@ -180,20 +169,97 @@ def _llm_classify(message: str, history: List[Dict[str, str]]) -> Optional[str]:
     except json.JSONDecodeError:
         return None
     candidate = data.get("skill_id")
-    if candidate and get_skill(candidate):
-        return candidate
-    return None
+    return candidate if candidate and get_skill(candidate) else None
+
+
+def _llm_classify_top(
+    message: str,
+    history: List[Dict[str, str]],
+    n: int = 3,
+    exclude: Optional[str] = None,
+) -> List[str]:
+    """Ask the LLM for the top N skill IDs ranked by fit. Returns a list (may be shorter than n)."""
+    skills = [s for s in all_skills() if s.id != exclude]
+    if not skills:
+        return []
+    catalog = "\n".join(
+        f"- id: {s.id} | name: {s.name} | description: {s.short_description()}"
+        for s in skills
+    )
+    system = (
+        f"You rank a student's message against the available Socratic teaching skills. "
+        f"Return the top {n} best-matching skill ids in order of fit. "
+        f'Reply with strict JSON of the form {{"skill_ids": ["id1", "id2", ...]}} '
+        f"using only ids from the catalog. Use fewer than {n} entries if fewer clearly fit. "
+        f"Return an empty list if nothing fits.\n\nCatalog:\n{catalog}"
+    )
+    convo = [
+        {"role": "user" if t.get("role") == "user" else "assistant", "content": t.get("content", "")}
+        for t in history[-6:]
+    ]
+    convo.append({"role": "user", "content": f"Student message:\n{message}"})
+    try:
+        raw = call_llm(system, convo)
+    except Exception:
+        return []
+    match = re.search(r"\{[^}]*\}", raw or "", re.DOTALL)
+    if not match:
+        return []
+    try:
+        data = json.loads(match.group(0))
+    except json.JSONDecodeError:
+        return []
+    ids = data.get("skill_ids", [])
+    return [sid for sid in ids if get_skill(sid) and sid != exclude][:n]
 
 
 def detect_skill(message: str, history: Optional[List[Dict[str, str]]] = None) -> Optional[str]:
-    """Return the best-matching skill id, or None if undetermined."""
+    """Return the single best-matching skill id, or None if undetermined."""
     history = history or []
-    top_id, top_score, runner = _keyword_detect(message)
+    scored = _keyword_scores(message)
+    if not scored:
+        return _llm_classify(message, history)
+
+    top_id, top_score = scored[0]
+    runner = scored[1][1] if len(scored) > 1 else 0
 
     KEYWORD_THRESHOLD = 3
     KEYWORD_MARGIN = 2
 
-    if top_id and top_score >= KEYWORD_THRESHOLD and (top_score - runner) >= KEYWORD_MARGIN:
+    if top_score >= KEYWORD_THRESHOLD and (top_score - runner) >= KEYWORD_MARGIN:
         return top_id
 
     return _llm_classify(message, history)
+
+
+def detect_top_skills(
+    message: str,
+    history: Optional[List[Dict[str, str]]] = None,
+    n: int = 3,
+    exclude: Optional[str] = None,
+) -> List[str]:
+    """Return up to n skill IDs ranked by how well they fit the message.
+
+    Combines keyword scores with an LLM ranking pass. The result is
+    deduplicated and excludes `exclude` (e.g. a skill the student just rejected).
+    """
+    history = history or []
+    scored = _keyword_scores(message)
+
+    # Take keyword candidates with any positive score
+    kw_candidates = [sid for sid, sc in scored if sc > 0 and sid != exclude]
+
+    # Always run the LLM ranker so confidence ordering is better
+    llm_candidates = _llm_classify_top(message, history, n=n, exclude=exclude)
+
+    # Merge: LLM order wins, fill remaining slots from keyword list
+    seen: set = set()
+    merged: List[str] = []
+    for sid in llm_candidates + kw_candidates:
+        if sid not in seen:
+            seen.add(sid)
+            merged.append(sid)
+        if len(merged) == n:
+            break
+
+    return merged
