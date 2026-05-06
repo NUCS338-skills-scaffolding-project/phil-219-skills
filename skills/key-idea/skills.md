@@ -10,7 +10,7 @@ learning_goal_tags:
 trigger_signals: 
   - "student-not-understanding-text"
 chip_icon: "💡"
-verion: 0.2.0
+version: "0.2.0"
 python_entry: logic.py
 ---
 
