@@ -2,7 +2,7 @@
 skill_id: “counterview-consideration”
 name: “Counterview-Consideration”
 stance: "socratic"
-skill_type: “instructional”
+skill_type: "instructional"
 tags: [“reading”, “critical-thinking”]
 course_types: ["humanities"]
 learning_goal_tags: 
