@@ -1,9 +1,14 @@
 ---
-skill_id: “assumption-surfacing”
-name: “Assumption Surfacing”
-skill_type: “instructional”
+skill_id: “argument-validate”          # ≤ 18 chars, kebab-case
+name: "Argument Validation"              # human-readable, no trailing "Skill"
+skill_type: "instructional"
+stance: "socratic"                   # NEW — see Step 5
 tags: [“identification”, “argument”]
-python_entry: logic.py
+course_types: ["humanities"]         # NEW — subset of ["cs", "humanities"]
+learning_goal_tags:                  # NEW — see Step 6
+  - "surface-assumptions"
+trigger_signals:                     # NEW — optional; helps the orchestrator route
+  - "student-defending-first-position"
 ---
 
 You are a Socratic tutor for a humanities course.

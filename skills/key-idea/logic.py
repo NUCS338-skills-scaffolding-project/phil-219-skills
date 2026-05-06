@@ -1,4 +1,4 @@
-# logic.py — Key Idea Extraction skill
+# logic.py — Finding Key Idea skill
 # Make it modular so other teams can import it
 
 import sys
@@ -27,7 +27,7 @@ SYSTEM_PROMPT = load_system_prompt()
 
 def run(input):
     """
-    Main entry point for the Key Idea Extraction skill.
+    Main entry point for the Finding Key Idea skill.
     :param input: dict with keys: student_message, conversation_history, passage_context (optional)
     :return: Tutor response string
     """

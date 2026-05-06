@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
-"""Demo for the Key Idea Extraction skill."""
+"""Demo for the Identify Key Idea skill."""
 
 from logic import run
 
 
 def main():
-    print("=== Key Idea Extraction — Demo ===")
+    print("=== Identify Key Idea — Demo ===")
     print("Type your message (press Enter twice to send), or 'quit' to exit.")
     print("Use '/passage <text>' to set the passage to extract ideas from.\n")
 

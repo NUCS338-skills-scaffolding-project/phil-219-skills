@@ -1,8 +1,17 @@
 ---
 skill_id: “counterview-consideration”
-name: “Counterview Consideration”
+name: “Counterview-Consideration”
+stance: "socratic"
 skill_type: “instructional”
 tags: [“reading”, “critical-thinking”]
+course_types: ["humanities"]
+learning_goal_tags: 
+  - "construct-arguments"
+  - "engage-objections"
+trigger-signals:
+  - "student-describes-position"
+chip_icon: "↩️"
+version: 0.2.0
 python_entry: logic.py
 ---
 

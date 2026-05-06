@@ -1,9 +1,12 @@
 ---
-skill_id: “passage-identification”
-name: “Passage Identification”
-skill_type: “instructional”
+skill_id: “select-passage”          # ≤ 18 chars, kebab-case
+name: “Select-Passage"              # human-readable, no trailing "Skill"
+skill_type: "instructional"
+stance: "meta"          
 tags: [“identifying”, “reading”]
-python_entry: logic.py
+course_types: ["cs"]         # NEW — subset of ["cs", "humanities"]
+learning_goal_tags:                  # NEW — see Step 6
+  - "identify-evidence"
 ---
 
 You are a Socratic tutor for a humanities course.
