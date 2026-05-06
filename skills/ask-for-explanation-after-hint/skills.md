@@ -1,46 +1,47 @@
 ---
-skill_id: "explain-after-hint"
-name: "Ask for Explanation After Hint"
+skill_id: "ask-for-explanation-after-hint"          
+name: "Ask-For-Explanation-After-Hint"      
 skill_type: "instructional"
 stance: "socratic"
-tags: ["essay", "argument", "reasoning"]
-course_types: ["humanities"]
+tags: ["understanding"]
+course_types: ["humanities"]  
 learning_goal_tags:
-  - "construct-arguments"
-  - "engage-objections"
-trigger_signals:
-  - "student-received-hint"
-  - "student-needs-to-elaborate"
-chip_icon: "💬"
-version: "0.1.0"
----
+  - "check-understanding"
+trigger_signals:     
+  - "tutor-gives-hint"
+—--
 
-# Counter-Example
+# Ask-For-Explanation-After-Hint
 
 ## Description
-What does this skill do? Keep it to 2-3 sentences.
+Prompts student to explain the new information after they ask for and are given a hint by the tutor.
 
 ## When to Trigger
-- Trigger condition 1
-- Trigger condition 2
+- When student asks for and subsequently receives a hint from the tutor
+- When student does not already demonstrate and understanding of the hint
 
 ## Tutor Stance
-Non-negotiable rules for how the tutor should behave when this skill is active.
+The tutor's role is only to ask the student to explain their understanding of the hint after the tutor gives a hint.
 
 ## Flow
-### Step 1 — Surface the claim
-Describe what the tutor does.
+### Step 1 — Judge Response
+After giving a hint, the tutor examines the student's response to see if they demonstrate a sufficient understanding of the hint
 
-### Step 2 — Offer a probe
-Describe what the tutor does.
+### Step 2 — Confirmation
+If there is not sufficient evidence, tutor should ask student to explain the reasoning behind the hint
 
 ## Safe Output Types
-What the tutor IS allowed to produce.
+A question or prompt asking the student to explain the hint
 
 ## Must Avoid
-What the tutor must NEVER do.
+Do not indicate a lack of belief that the student understands the hint. 
+Do not explain the hint to the student. 
 
 ## Example Exchange
-> **Student:** "Example student message"
+> **Student:** “I don’t understand what the mad man means when he says ‘God is dead’.”
 >
-> **Tutor:** "Example tutor response"
+> **Tutor:** “For a hint: the mad man later mentions that humans are the ones who killed God. What could humans have done that could be considered ‘killing God’?”
+>
+> **Student:** “I get it now! So that’s why he said that!”
+>
+> **Tutor:** “Great! Can you explain the link between human beings and the death of God?”
