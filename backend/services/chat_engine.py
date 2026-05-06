@@ -56,6 +56,18 @@ STUDENT_SKILL_DESCRIPTIONS: Dict[str, str] = {
         "Have an interpretation but want to stress-test it? "
         "I'll prompt you to think through other possible readings."
     ),
+    "summarize-progress": (
+        "Feeling lost after a long conversation? I'll give you a clear picture "
+        "of what you've figured out, what's still open, and where to go next."
+    ),
+    "prompt-reflection": (
+        "Feel like you've made progress? I'll help you look back at how your "
+        "thinking has shifted and what you've figured out."
+    ),
+    "affirm-progress": (
+        "Made an attempt but not sure if you're on the right track? "
+        "I'll tell you exactly what you got right and where to go next."
+    ),
 }
 
 
