@@ -1,6 +1,6 @@
 ---
-skill_id: "ask-for-explanation-after-hint"          
-name: "Ask-For-Explanation-After-Hint"      
+skill_id: "explain-after-hint"
+name: "Explain After Hint"
 skill_type: "instructional"
 stance: "socratic"
 tags: ["understanding"]
