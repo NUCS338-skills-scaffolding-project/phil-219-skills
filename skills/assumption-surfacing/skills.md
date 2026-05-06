@@ -1,10 +1,10 @@
 ---
 skill_id: “assumption-surface”
 name: “Assumption Surfacing”
-skill_type: “instructional”
-stance: “socratic”
+skill_type: "instructional"
+stance: "socratic"
 tags: [“identification”, “argument”]
-course_types: [“humanities”]
+course_types: ["humanities"]
 learning_goal_tags:
   - “surface-assumptions”
 trigger_signals:
