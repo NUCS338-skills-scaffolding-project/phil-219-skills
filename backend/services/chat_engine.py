@@ -27,11 +27,16 @@ _RESTART_PATTERN = re.compile(
     re.IGNORECASE,
 )
 _CHITCHAT_PATTERN = re.compile(
-    r"\b(how are you|how'?s it going|what'?s up|good (morning|afternoon|evening)|"
+    r"\b(how are you|how is your day|hows? it going|what'?s up|good (morning|afternoon|evening)|"
     r"hello|hi there|hey there|thanks|thank you|who are you|what are you|"
-    r"how'?s your day|how was your day|you'?re (great|awesome|helpful|amazing))\b",
+    r"hows? your day|how was your day|you'?re (great|awesome|helpful|amazing)|"
+    r"how'?s everything|how have you been|what are you up to)\b",
     re.IGNORECASE,
 )
+
+# These skills are triggered by the system based on conversation signals —
+# never shown to the student as options they manually pick.
+META_SKILLS = {"prompt-reflection", "affirm-progress", "summarize-progress"}
 
 # Student-facing descriptions — written from the student's perspective,
 # not the tutor's. Shown in skill lists presented to the user.
@@ -254,6 +259,8 @@ def _student_description(skill_id: str, skill_name: str) -> str:
 def _candidates_prompt(candidate_ids: List[str]) -> str:
     lines = []
     for sid in candidate_ids:
+        if sid in META_SKILLS:
+            continue
         skill = get_skill(sid)
         if skill:
             lines.append(f"- **{skill.name}**: {_student_description(sid, skill.name)}")
@@ -271,6 +278,7 @@ def _full_skills_prompt() -> str:
     lines = [
         f"- **{s.name}**: {_student_description(s.id, s.name)}"
         for s in all_skills()
+        if s.id not in META_SKILLS
     ]
     return (
         "Here's everything I can help with — just reply with any word from the skill name "
@@ -280,7 +288,7 @@ def _full_skills_prompt() -> str:
 
 
 def _all_skill_ids() -> List[str]:
-    return [s.id for s in all_skills()]
+    return [s.id for s in all_skills() if s.id not in META_SKILLS]
 
 
 # ---------- candidate matching ----------
@@ -359,6 +367,24 @@ def handle_user_message(
             "state_change": {"active_skill": None, "pending_skill": None, "skill_candidates": None},
         }
 
+    # ── Chitchat — respond naturally regardless of session state ───────────
+    if _is_chitchat(content):
+        assistant_text = _chitchat_response(content)
+        assistant_msg = storage.append_message(chat_id, "assistant", assistant_text)
+        chat = storage.get_chat(chat_id) or chat
+        return {
+            "user_message": user_msg,
+            "assistant_message": assistant_msg,
+            "chat": {
+                "id": chat["id"],
+                "title": chat.get("title"),
+                "active_skill": chat.get("active_skill"),
+                "pending_skill": chat.get("pending_skill"),
+                "skill_candidates": chat.get("skill_candidates"),
+            },
+            "state_change": {},
+        }
+
     # ── Branch 1: student is choosing from a short candidate list ──────────
     if candidates:
         matched = _match_from_candidates(content, candidates)
@@ -428,24 +454,6 @@ def handle_user_message(
 
     # ── Branch 4: fresh message, no state ──────────────────────────────────
     else:
-        # Handle casual conversation before trying to route to a skill
-        if _is_chitchat(content):
-            assistant_text = _chitchat_response(content)
-            assistant_msg = storage.append_message(chat_id, "assistant", assistant_text)
-            chat = storage.get_chat(chat_id) or chat
-            return {
-                "user_message": user_msg,
-                "assistant_message": assistant_msg,
-                "chat": {
-                    "id": chat["id"],
-                    "title": chat.get("title"),
-                    "active_skill": None,
-                    "pending_skill": None,
-                    "skill_candidates": None,
-                },
-                "state_change": {},
-            }
-
         history_for_detector = [
             {"role": m["role"], "content": m["content"]}
             for m in chat.get("messages", [])[:-1]
