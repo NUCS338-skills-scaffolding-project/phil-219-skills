@@ -10,7 +10,7 @@ learning_goal_tags:
 trigger_signals:     
   - "student-declares-understanding"
 
-—--
+---
 
 # Ask-For-Paraphrase
 

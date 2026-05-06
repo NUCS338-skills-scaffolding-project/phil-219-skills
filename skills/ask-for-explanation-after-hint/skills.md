@@ -9,7 +9,7 @@ learning_goal_tags:
   - "check-understanding"
 trigger_signals:     
   - "tutor-gives-hint"
-—--
+---
 
 # Ask-For-Explanation-After-Hint
 
