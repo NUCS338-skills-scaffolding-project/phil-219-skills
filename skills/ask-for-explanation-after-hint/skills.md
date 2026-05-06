@@ -1,18 +1,18 @@
 ---
-skill_id: "counter-example"          # ≤ 18 chars, kebab-case
-name: "Counter-Example"              # human-readable, no trailing "Skill"
+skill_id: "explain-after-hint"
+name: "Ask for Explanation After Hint"
 skill_type: "instructional"
-stance: "socratic"                   # NEW — see Step 5
-tags: ["essay", "argument", "kant"]
-course_types: ["humanities"]         # NEW — subset of ["cs", "humanities"]
-learning_goal_tags:                  # NEW — see Step 6
+stance: "socratic"
+tags: ["essay", "argument", "reasoning"]
+course_types: ["humanities"]
+learning_goal_tags:
   - "construct-arguments"
   - "engage-objections"
-trigger_signals:                     # NEW — optional; helps the orchestrator route
-  - "student-defending-first-position"
-chip_icon: "🔁"                      # OPTIONAL — single emoji for the UI
-version: "0.1.0"                     # OPTIONAL — semver, defaults to "0.1.0"
-# python_entry omitted — this skill has no logic.py
+trigger_signals:
+  - "student-received-hint"
+  - "student-needs-to-elaborate"
+chip_icon: "💬"
+version: "0.1.0"
 ---
 
 # Counter-Example

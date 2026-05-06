@@ -8,10 +8,10 @@ course_types: ["humanities"]
 learning_goal_tags: 
   - "construct-arguments"
   - "engage-objections"
-trigger-signals:
+trigger_signals:
   - "student-describes-position"
 chip_icon: "↩️"
-version: 0.2.0
+version: "0.2.0"
 python_entry: logic.py
 ---
 
