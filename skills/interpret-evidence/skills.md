@@ -1,5 +1,5 @@
 ---
-skill_id: "evidence-interpret"
+skill_id: "interpret-evidence"
 name: "Evidence Interpretation"
 skill_type: "instructional"
 stance: "socratic"

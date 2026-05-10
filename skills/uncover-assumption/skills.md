@@ -1,5 +1,5 @@
 ---
-skill_id: "surface-assumption"
+skill_id: "uncover-assumption"
 name: "Assumption Surfacing"
 skill_type: "instructional"
 stance: "socratic"
