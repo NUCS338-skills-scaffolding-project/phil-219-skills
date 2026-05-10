@@ -1,6 +1,6 @@
 ---
 skill_id: "select-passage"
-name: "Select Passage"
+name: "Passage Identification"
 skill_type: "instructional"
 stance: "meta"
 tags: ["identifying", "reading"]

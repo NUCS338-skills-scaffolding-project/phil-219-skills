@@ -36,42 +36,34 @@ _CHITCHAT_PATTERN = re.compile(
 
 # These skills are triggered by the system based on conversation signals —
 # never shown to the student as options they manually pick.
-META_SKILLS = {"prompt-reflection", "affirm-progress", "summarize-progress"}
+META_SKILLS = {"prompt-reflection", "affirm-progress", "summarize-progress", "explain-after-hint", "ask-for-paraphrase"}
 
 # Student-facing descriptions — written from the student's perspective,
 # not the tutor's. Shown in skill lists presented to the user.
 STUDENT_SKILL_DESCRIPTIONS: Dict[str, str] = {
-    "passage-identification": (
+    "Passage Identification": (
         "Not sure where in the text your confusion is coming from? "
         "I'll help you find the exact passage."
     ),
-    "key-idea": (
+    "Identify Key Idea": (
         "Struggling to pin down what a passage is actually saying? "
         "I'll guide you to the main idea in your own words."
     ),
-    "evidence-interpretation": (
+    "Evidence Interpretation": (
         "Have a quote but not sure how it supports your argument? "
         "I'll help you work out the connection yourself."
     ),
-    "assumption-surfacing": (
+    "Assumption Surfacing": (
         "Think you might be making a logical leap in your argument? "
         "I'll help you identify and address it."
     ),
-    "counterview-consideration": (
+    "Counterview Consideration": (
         "Have an interpretation but want to stress-test it? "
         "I'll prompt you to think through other possible readings."
     ),
-    "summarize-progress": (
+    "Summarize Progress": (
         "Feeling lost after a long conversation? I'll give you a clear picture "
         "of what you've figured out, what's still open, and where to go next."
-    ),
-    "prompt-reflection": (
-        "Feel like you've made progress? I'll help you look back at how your "
-        "thinking has shifted and what you've figured out."
-    ),
-    "affirm-progress": (
-        "Made an attempt but not sure if you're on the right track? "
-        "I'll tell you exactly what you got right and where to go next."
     ),
 }
 
