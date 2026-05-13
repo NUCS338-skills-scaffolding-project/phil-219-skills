@@ -9,6 +9,11 @@ learning_goal_tags:
   - "interpret-evidence"
 trigger_signals:
   - "student-reasoning-with-text"
+  - "student-cites-quotation"
+  - "student-says-this-proves"
+  - "student-connecting-evidence-to-claim"
+  - "student-drops-quote-without-explanation"
+  - "student-uses-evidence-without-linking-to-argument"
 chip_icon: "🔍"
 version: "0.1.0"
 python_entry: logic.py
