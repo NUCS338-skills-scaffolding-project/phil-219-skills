@@ -10,6 +10,11 @@ learning_goal_tags:
   - "engage-objections"
 trigger_signals:
   - "student-describes-position"
+  - "student-argues-position-confidently"
+  - "student-asks-for-confirmation-of-interpretation"
+  - "student-presents-one-sided-argument"
+  - "student-dismisses-alternative-reading"
+  - "student-reaches-conclusion-without-considering-objections"
 chip_icon: "↩️"
 version: "0.2.0"
 python_entry: logic.py
