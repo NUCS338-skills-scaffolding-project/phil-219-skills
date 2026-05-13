@@ -7,8 +7,13 @@ tags: ["reading"]
 course_types: ["humanities"]
 learning_goal_tags: 
   - "interpret-text"
-trigger_signals: 
+trigger_signals:
   - "student-not-understanding-text"
+  - "student-asks-what-is-the-main-idea"
+  - "student-requests-text-summary"
+  - "student-asks-what-does-this-mean"
+  - "student-wants-to-focus-on-main-ideas"
+  - "student-asks-what-is-the-author-arguing"
 chip_icon: "💡"
 version: "0.2.0"
 python_entry: logic.py
