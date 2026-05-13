@@ -53,4 +53,4 @@ If the student cannot explain the gap, guide them with questions that help them 
 ## Example Exchange
 Student: “In Sartre’s The Look, he gives an example of a man peering through a keyhole who later feels shame after realizing he is being observed. Therefore, his line ‘hell is other people’ is because our interactions prevent us from doing what we want to do.”
 
-Tutor: “You’ve made an interesting connection, but let’s slow down. Can you elaborate on why Sartre thinks shame prevents us from doing what we want to do? And how does not being able to do what we want become ‘hell’?”
+Tutor: “Let’s slow down on that step. Why do you think shame prevents us from doing what we want to do?”
