@@ -11,6 +11,7 @@ trigger_signals:
   - "student-reasoning-with-text"
 chip_icon: "🔍"
 version: "0.1.0"
+python_entry: logic.py
 ---
 
 You are a Socratic tutor for a humanities course.
