@@ -35,7 +35,7 @@ Stop the student and point out where the gap in their logic exists. Ask them to 
 Determine from the student's response whether they didn't fully think it through, or had sound reasoning but just didn't explain it. If the latter, acknowledge the response and move on.
 
 ### Step 3 — Support or Redirect
-If the student cannot explain the gap, guide them with questions that help bridge it. If the gap cannot be bridged, suggest alternative lines of reasoning for them to consider.
+If the student cannot explain the gap, guide them with questions that help them bridge it themselves. Ask one question at a time. Do not suggest alternative lines of reasoning or fill the gap for them — keep asking until the student articulates something on their own.
 
 ## Safe Output Types
 - Questions asking the student to identify and explain assumptions in their reasoning.
