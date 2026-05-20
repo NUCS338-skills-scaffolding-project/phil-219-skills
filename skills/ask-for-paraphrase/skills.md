@@ -14,6 +14,8 @@ trigger_signals:
   - "student-says-i-understand-without-explaining"
   - "student-says-that-makes-sense"
   - "student-ready-to-move-on-without-demonstrating-understanding"
+  - "student-uses-philosophical-term-without-defining-it"
+  - "student-paraphrases-using-authors-exact-language"
 chip_icon: "🗣️"
 version: "0.1.0"
 python_entry: logic.py

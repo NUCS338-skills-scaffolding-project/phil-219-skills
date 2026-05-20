@@ -14,6 +14,8 @@ trigger_signals:
   - "student-connecting-evidence-to-claim"
   - "student-drops-quote-without-explanation"
   - "student-uses-evidence-without-linking-to-argument"
+  - "student-evaluates-before-explaining"
+  - "student-expresses-agreement-or-disagreement-before-stating-authors-claim"
 chip_icon: "🔍"
 version: "0.1.0"
 python_entry: logic.py

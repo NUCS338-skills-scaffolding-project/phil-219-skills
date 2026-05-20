@@ -15,6 +15,8 @@ trigger_signals:
   - "student-presents-one-sided-argument"
   - "student-dismisses-alternative-reading"
   - "student-reaches-conclusion-without-considering-objections"
+  - "student-dismisses-view-as-obviously-wrong"
+  - "student-states-position-without-steelmanning-opposing-view"
 chip_icon: "↩️"
 version: "0.2.0"
 python_entry: logic.py

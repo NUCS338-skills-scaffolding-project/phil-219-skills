@@ -14,6 +14,8 @@ trigger_signals:
   - "student-names-a-theme-or-position"
   - "student-asks-for-quotes-on-a-topic"
   - "student-wants-evidence-to-back-up-an-interpretation"
+  - "student-makes-claim-without-citing-text"
+  - "student-makes-argument-without-textual-evidence"
 chip_icon: "📑"
 version: "0.2.0"
 python_entry: logic.py
