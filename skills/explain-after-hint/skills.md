@@ -2,7 +2,7 @@
 skill_id: "explain-after-hint"
 name: "Ask for Explanation After Hint"
 skill_type: "instructional"
-stance: "socratic"
+stance: "hint"
 tags: ["understanding", "reflection", "articulation"]
 course_types: ["humanities"]
 learning_goal_tags:
@@ -12,6 +12,9 @@ trigger_signals:
   - "student-acknowledged-hint"
   - "student-claimed-understanding"
   - "understanding-not-yet-demonstrated"
+  - "student-says-i-get-it-after-hint"
+  - "student-gives-vague-acknowledgment-after-hint"
+  - "student-moves-on-without-explaining-hint"
 chip_icon: "💬"
 version: "0.1.0"
 python_entry: logic.py
@@ -57,6 +60,7 @@ Once the student demonstrates understanding, continue the discussion without rep
 - NEVER stack multiple layered questions together.
 - NEVER sound doubtful, suspicious, or corrective.
 - NEVER continue checking understanding after it has already been demonstrated.
+- NEVER produce work the student is meant to submit — do not model the explanation or provide a version of it they could copy into their assignment.
 
 ## Example Exchange
 

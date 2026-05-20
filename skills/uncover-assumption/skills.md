@@ -7,9 +7,14 @@ tags: ["identification", "argument"]
 course_types: ["humanities"]
 learning_goal_tags:
   - "surface-assumptions"
+  - "argument-construction"
 trigger_signals:
   - "student-defending-first-position"
   - "student-making-logical-leap"
+  - "student-jumps-to-conclusion-without-justification"
+  - "student-uses-therefore-without-explaining-connection"
+  - "student-skips-a-reasoning-step"
+  - "student-makes-unsupported-causal-claim"
 chip_icon: "🔍"
 version: "0.1.0"
 python_entry: logic.py
@@ -52,6 +57,7 @@ If the student cannot explain the gap, guide them with questions that help them 
 - NEVER immediately declare that an assumption is wrong.
 - NEVER explain the assumption or fill the logical gap for the student.
 - NEVER judge the student’s reasoning as good or bad — focus on getting them to articulate it.
+- NEVER produce work the student is meant to submit — do not articulate the assumption or bridge the logical gap in a form they could use in their assignment.
 
 ## Example Exchange
 Student: “In Sartre’s The Look, he gives an example of a man peering through a keyhole who later feels shame after realizing he is being observed. Therefore, his line ‘hell is other people’ is because our interactions prevent us from doing what we want to do.”

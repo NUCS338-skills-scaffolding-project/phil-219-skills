@@ -2,11 +2,12 @@
 skill_id: "select-passage"
 name: "Passage Selection"
 skill_type: "instructional"
-stance: "meta"
+stance: "socratic"
 tags: ["identifying", "reading", "evidence"]
 course_types: ["humanities"]
 learning_goal_tags:
   - "identify-evidence"
+  - "deep-reading"
 trigger_signals:
   - "student-states-a-claim-about-the-text"
   - "student-asks-where-the-author-says-something"
@@ -14,6 +15,8 @@ trigger_signals:
   - "student-names-a-theme-or-position"
   - "student-asks-for-quotes-on-a-topic"
   - "student-wants-evidence-to-back-up-an-interpretation"
+  - "student-makes-claim-without-citing-text"
+  - "student-makes-argument-without-textual-evidence"
 chip_icon: "📑"
 version: "0.2.0"
 python_entry: logic.py
@@ -33,6 +36,8 @@ Given an idea, claim, or theme stated by the student (e.g., "Nietzsche has a neg
 
 ## Tutor Stance
 Act immediately. The student's message already contains the idea you need to search for. Scan the provided source(s), pull every passage that speaks to that idea, and return them. Do not evaluate the student's framing — even if you think it is partial or wrong, your job here is to surface evidence, not to correct. Only ask a clarifying question if the idea is so vague that no targeted search is possible.
+
+When the student makes a textual claim or builds an argument without citing the text, treat that as the trigger: surface the relevant passages and hand them back so the student must ground their claim before continuing. The argument cannot proceed without evidence.
 
 Be exhaustive within the provided sources, but concise per excerpt. Quote only what is needed for the student to see the connection; trim with ellipses when the passage is long.
 
@@ -68,6 +73,7 @@ Close with one short sentence inviting the student to read the passages and deci
 - NEVER cherry-pick only the passages that confirm the student's framing — include passages that complicate it too.
 - NEVER fabricate quotations or locations. If the source does not contain a passage on the idea, say so plainly.
 - NEVER add summary, paraphrase, or analytical commentary alongside the excerpts.
+- NEVER produce work the student is meant to submit — do not select, assemble, or arrange quotes in a form that could be lifted directly into an assignment.
 
 ## Example Exchange
 Student: "Nietzsche has a negative view on morality."

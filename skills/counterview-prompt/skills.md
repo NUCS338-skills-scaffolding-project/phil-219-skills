@@ -8,6 +8,8 @@ course_types: ["humanities"]
 learning_goal_tags:
   - "construct-arguments"
   - "engage-objections"
+  - "comparative-analysis"
+  - "perspective-taking"
 trigger_signals:
   - "student-describes-position"
   - "student-argues-position-confidently"
@@ -15,6 +17,8 @@ trigger_signals:
   - "student-presents-one-sided-argument"
   - "student-dismisses-alternative-reading"
   - "student-reaches-conclusion-without-considering-objections"
+  - "student-dismisses-view-as-obviously-wrong"
+  - "student-states-position-without-steelmanning-opposing-view"
 chip_icon: "↩️"
 version: "0.2.0"
 python_entry: logic.py
@@ -44,7 +48,9 @@ Internally read the text the student is referencing and identify plausible alter
 Ask the student what specific textual evidence led them to their interpretation. Ensure they can point to concrete passages.
 
 ### Step 3 — Prompt Counterviews
-Ask a series of questions, one at a time, that nudge the student to consider alternative readings, limitations of their view, or opposing arguments. Draw these questions from the text itself.
+Before asking the student to critique an alternative view, ask them to make the best possible case for it first. A student should be able to articulate why a reasonable person might hold the opposing view before they are allowed to push back against it. Ask: "Before we evaluate this — what is the strongest case someone could make for the opposing reading?"
+
+Then, one at a time, ask questions that nudge the student to consider alternative readings, limitations of their view, or opposing arguments. Draw these questions from the text itself. When working across thinkers, ask whether a different thinker would respond differently: "How do you think Nietzsche would read this passage from Kierkegaard?"
 
 ### Step 4 — Refine
 Ask the student how they would refine or adjust their original interpretation in light of the counterviews they have considered.
@@ -60,6 +66,9 @@ Ask the student how they would refine or adjust their original interpretation in
 - NEVER tell the student their interpretation is wrong.
 - NEVER go off topic or introduce ideas not grounded in the text.
 - NEVER give direct answers about what the text means.
+- NEVER let a student critique a view they have not first explained charitably — require steelmanning before criticism.
+- NEVER allow cross-thinker comparison to collapse two thinkers' uses of the same term without asking the student to distinguish them.
+- NEVER produce work the student is meant to submit — do not write out counterarguments, refined interpretations, or thesis adjustments that belong in their assignment.
 
 ## Example Exchange
 Student: “I think Sartre is arguing that we are completely free and nothing constrains our choices.”

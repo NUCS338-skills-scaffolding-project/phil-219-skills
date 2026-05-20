@@ -8,10 +8,12 @@ course_types: ["humanities"]
 learning_goal_tags:
   - "construct-arguments"
   - "evaluate-options"
+  - "comparative-analysis"
 trigger_signals:
   - "multiple-valid-approaches"
   - "student-comparing-options"
   - "student-defending-single-approach"
+  - "student-makes-global-judgment-about-which-thinker-is-correct"
 chip_icon: "⚖️"
 version: "0.1.0"
 ---
@@ -59,6 +61,7 @@ Once the student has worked through at least one dimension, ask them which appro
 - NEVER introduce a new approach the student has not considered unless they are stuck
 - NEVER ask multiple comparison questions at once — take one dimension at a time
 - NEVER evaluate the student's final choice as right or wrong
+- NEVER produce work the student is meant to submit — do not articulate the tradeoff analysis or reasoned position on their behalf.
 
 ## Example Exchange
 Student: "I think Sartre's concept of radical freedom is a better explanation of human agency than Heidegger's thrownness."

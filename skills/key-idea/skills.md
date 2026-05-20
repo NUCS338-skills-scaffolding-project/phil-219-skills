@@ -5,8 +5,9 @@ stance: "socratic"
 skill_type: "instructional"
 tags: ["reading"]
 course_types: ["humanities"]
-learning_goal_tags: 
+learning_goal_tags:
   - "interpret-text"
+  - "deep-reading"
 trigger_signals:
   - "student-not-understanding-text"
   - "student-asks-what-is-the-main-idea"
@@ -72,6 +73,7 @@ Once the student has worked toward the main idea through their own attempts, ask
 - NEVER state the main idea or central claim, even partially.
 - NEVER move to targeted questions before the student has made at least two genuine attempts.
 - NEVER give in when the student asks you to just tell them — ask them to try first.
+- NEVER produce work the student is meant to submit — do not state, summarize, or write out the main idea in a form they could use in their assignment.
 
 ## Example Exchange
 Student: "Before an outline, let’s focus on the main ideas."
