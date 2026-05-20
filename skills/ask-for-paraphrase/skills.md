@@ -11,6 +11,9 @@ trigger_signals:
   - "student-declares-understanding"
   - "post-hint-confirmation"
   - "post-discussion-closure"
+  - "student-says-i-understand-without-explaining"
+  - "student-says-that-makes-sense"
+  - "student-ready-to-move-on-without-demonstrating-understanding"
 chip_icon: "🗣️"
 version: "0.1.0"
 python_entry: logic.py
