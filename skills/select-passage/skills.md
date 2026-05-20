@@ -2,7 +2,7 @@
 skill_id: "select-passage"
 name: "Passage Selection"
 skill_type: "instructional"
-stance: "meta"
+stance: "socratic"
 tags: ["identifying", "reading", "evidence"]
 course_types: ["humanities"]
 learning_goal_tags:
