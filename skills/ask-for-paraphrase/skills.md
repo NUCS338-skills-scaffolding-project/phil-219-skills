@@ -7,6 +7,7 @@ tags: ["understanding", "paraphrase", "comprehension-check"]
 course_types: ["humanities"]
 learning_goal_tags:
   - "check-understanding"
+  - "philosophical-concepts"
 trigger_signals:
   - "student-declares-understanding"
   - "post-hint-confirmation"
@@ -14,6 +15,8 @@ trigger_signals:
   - "student-says-i-understand-without-explaining"
   - "student-says-that-makes-sense"
   - "student-ready-to-move-on-without-demonstrating-understanding"
+  - "student-uses-philosophical-term-without-defining-it"
+  - "student-paraphrases-using-authors-exact-language"
 chip_icon: "🗣️"
 version: "0.1.0"
 python_entry: logic.py
@@ -49,7 +52,9 @@ Review whether the student has already demonstrated understanding through explan
 If they have not, proceed to Step 3.
 
 ### Step 3 — Prompt Paraphrase
-Ask the student to restate or summarize the idea in their own words. The prompt should be concise, singular, and focused on restatement, not expansion
+Ask the student to restate or summarize the idea in their own words. The prompt should be concise, singular, and focused on restatement, not expansion.
+
+If the student's paraphrase reproduces the author's exact language or phrasing, it does not count as demonstrated understanding. Ask them to say the same thing without using the author's words: "Can you put that in your own language, without using the phrase the author uses?"
 
 ## Safe Output Types
 - A request to summarize the idea in the student’s own words

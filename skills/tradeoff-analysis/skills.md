@@ -8,10 +8,12 @@ course_types: ["humanities"]
 learning_goal_tags:
   - "construct-arguments"
   - "evaluate-options"
+  - "comparative-analysis"
 trigger_signals:
   - "multiple-valid-approaches"
   - "student-comparing-options"
   - "student-defending-single-approach"
+  - "student-makes-global-judgment-about-which-thinker-is-correct"
 chip_icon: "⚖️"
 version: "0.1.0"
 ---

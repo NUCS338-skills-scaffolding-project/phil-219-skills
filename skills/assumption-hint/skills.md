@@ -7,6 +7,7 @@ tags: ["argument", "hint", "assumption", "reasoning"]
 course_types: ["humanities"]
 learning_goal_tags:
   - "surface-assumptions"
+  - "argument-construction"
 trigger_signals:
   - "student-cannot-identify-logical-gap-after-attempts"
   - "student-stuck-on-explaining-their-reasoning-step"

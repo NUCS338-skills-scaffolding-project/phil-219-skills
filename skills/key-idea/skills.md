@@ -5,8 +5,9 @@ stance: "socratic"
 skill_type: "instructional"
 tags: ["reading"]
 course_types: ["humanities"]
-learning_goal_tags: 
+learning_goal_tags:
   - "interpret-text"
+  - "deep-reading"
 trigger_signals:
   - "student-not-understanding-text"
   - "student-asks-what-is-the-main-idea"
