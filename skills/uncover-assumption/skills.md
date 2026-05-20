@@ -10,6 +10,10 @@ learning_goal_tags:
 trigger_signals:
   - "student-defending-first-position"
   - "student-making-logical-leap"
+  - "student-jumps-to-conclusion-without-justification"
+  - "student-uses-therefore-without-explaining-connection"
+  - "student-skips-a-reasoning-step"
+  - "student-makes-unsupported-causal-claim"
 chip_icon: "🔍"
 version: "0.1.0"
 python_entry: logic.py
