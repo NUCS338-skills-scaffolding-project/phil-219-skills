@@ -2,7 +2,7 @@
 skill_id: "explain-after-hint"
 name: "Ask for Explanation After Hint"
 skill_type: "instructional"
-stance: "socratic"
+stance: "hint"
 tags: ["understanding", "reflection", "articulation"]
 course_types: ["humanities"]
 learning_goal_tags:
@@ -12,6 +12,9 @@ trigger_signals:
   - "student-acknowledged-hint"
   - "student-claimed-understanding"
   - "understanding-not-yet-demonstrated"
+  - "student-says-i-get-it-after-hint"
+  - "student-gives-vague-acknowledgment-after-hint"
+  - "student-moves-on-without-explaining-hint"
 chip_icon: "💬"
 version: "0.1.0"
 python_entry: logic.py
