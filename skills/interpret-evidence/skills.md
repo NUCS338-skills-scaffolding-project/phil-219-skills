@@ -7,6 +7,7 @@ tags: ["essay", "argument", "evidence", "reasoning"]
 course_types: ["humanities"]
 learning_goal_tags:
   - "interpret-evidence"
+  - "exposition"
 trigger_signals:
   - "student-reasoning-with-text"
   - "student-cites-quotation"

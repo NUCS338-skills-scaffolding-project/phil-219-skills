@@ -7,6 +7,7 @@ tags: ["identifying", "reading", "evidence"]
 course_types: ["humanities"]
 learning_goal_tags:
   - "identify-evidence"
+  - "deep-reading"
 trigger_signals:
   - "student-states-a-claim-about-the-text"
   - "student-asks-where-the-author-says-something"

@@ -8,6 +8,7 @@ course_types: ["humanities"]
 learning_goal_tags:
   - "construct-arguments"
   - "evaluate-options"
+  - "comparative-analysis"
 trigger_signals:
   - "multiple-valid-approaches"
   - "student-comparing-options"

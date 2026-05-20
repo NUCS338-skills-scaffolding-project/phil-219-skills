@@ -7,6 +7,7 @@ tags: ["understanding", "paraphrase", "comprehension-check"]
 course_types: ["humanities"]
 learning_goal_tags:
   - "check-understanding"
+  - "philosophical-concepts"
 trigger_signals:
   - "student-declares-understanding"
   - "post-hint-confirmation"

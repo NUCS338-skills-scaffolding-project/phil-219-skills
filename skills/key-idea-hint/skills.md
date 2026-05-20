@@ -7,6 +7,7 @@ tags: ["reading", "hint", "main-idea"]
 course_types: ["humanities"]
 learning_goal_tags:
   - "interpret-text"
+  - "deep-reading"
 trigger_signals:
   - "student-cannot-identify-main-idea-after-attempts"
   - "student-stuck-on-what-passage-is-arguing"

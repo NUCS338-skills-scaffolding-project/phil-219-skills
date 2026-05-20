@@ -7,6 +7,7 @@ tags: ["identification", "argument"]
 course_types: ["humanities"]
 learning_goal_tags:
   - "surface-assumptions"
+  - "argument-construction"
 trigger_signals:
   - "student-defending-first-position"
   - "student-making-logical-leap"

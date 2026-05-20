@@ -8,6 +8,8 @@ course_types: ["humanities"]
 learning_goal_tags:
   - "construct-arguments"
   - "engage-objections"
+  - "comparative-analysis"
+  - "perspective-taking"
 trigger_signals:
   - "student-describes-position"
   - "student-argues-position-confidently"
