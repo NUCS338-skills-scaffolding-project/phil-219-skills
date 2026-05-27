@@ -9,10 +9,10 @@ learning_goal_tags:
   - "philosophical-concepts"
   - "deep-reading"
 trigger_signals:
-  - "student-uses-philosophical-term-without-defining-it"
+  - "student-uses-philosophical-term-without-specifying-which-thinker-defines-it"
   - "student-uses-term-loosely-or-colloquially"
   - "student-applies-concept-from-one-thinker-to-another-without-noting-difference"
-  - "student-treats-technical-term-as-synonymous-with-everyday-meaning"
+  - "student-uses-absurdity-alienation-anxiety-or-authenticity-as-everyday-word"
   - "student-uses-absurdity-alienation-anxiety-or-authenticity-vaguely"
   - "student-conflates-two-thinkers-use-of-the-same-term"
 chip_icon: "📖"

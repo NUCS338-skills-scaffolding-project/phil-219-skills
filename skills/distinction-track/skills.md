@@ -10,11 +10,11 @@ learning_goal_tags:
   - "define-technical-term"
   - "distinguish-related-concepts"
 trigger_signals:
-  - "student-uses-key-term-without-defining-it"
-  - "student-uses-term-inconsistently"
+  - "student-uses-term-without-consistent-definition-across-draft"
+  - "student-uses-term-inconsistently-across-draft"
   - "student-asks-difference-between-two-concepts"
-  - "student-conflates-two-distinct-ideas"
-  - "student-uses-everyday-meaning-of-technical-term"
+  - "student-conflates-two-distinct-ideas-in-draft-argument"
+  - "student-shifts-between-technical-and-everyday-meaning-of-same-term"
 chip_icon: "⚖️"
 version: "0.1.0"
 python_entry: logic.py

@@ -13,7 +13,7 @@ learning_goal_tags:
 trigger_signals:
   - "student-describes-position"
   - "student-argues-position-confidently"
-  - "student-asks-for-confirmation-of-interpretation"
+  - "student-asks-for-validation-of-their-argument-or-conclusion"
   - "student-presents-one-sided-argument"
   - "student-dismisses-alternative-reading"
   - "student-reaches-conclusion-without-considering-objections"
