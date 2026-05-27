@@ -11,6 +11,9 @@ learning_goal_tags:
   - "trace-distinction"
 trigger_signals:
   - "student-shares-passage-and-asks-what-it-means"
+  - "student-pastes-passage-and-asks-for-help-understanding-it"
+  - "student-says-i-want-to-analyze-this-passage"
+  - "student-says-i-am-stuck-on-this-passage"
   - "student-unsure-if-quote-supports-argument"
   - "student-draft-contains-uninterpreted-quotation"
   - "student-asks-if-passage-is-relevant-to-prompt"
