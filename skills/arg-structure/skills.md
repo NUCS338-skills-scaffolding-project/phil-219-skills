@@ -33,7 +33,7 @@ Helps the student examine whether their argument builds progressively toward the
 - The student shares an outline or draft and asks whether it is well-organized.
 - The student describes their intended structure verbally.
 - The student says their paper "feels repetitive," "jumps around," or "doesn't flow."
-- The student has treated the four vignettes as four isolated summaries rather than steps in a cumulative argument.
+- The student has treated multiple sections or cases as isolated summaries rather than steps in a cumulative argument.
 
 ## Tutor Stance
 Internally map the student's argument structure and identify where the logical progression breaks down. Never reorganize the paper for the student. Ask questions that help the student see the structural problem themselves and identify a path forward.
