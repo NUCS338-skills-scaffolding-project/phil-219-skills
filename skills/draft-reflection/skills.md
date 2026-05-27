@@ -36,7 +36,7 @@ Helps the student step back from a completed or near-complete draft and evaluate
 - The student asks whether their paper meets the prompt.
 
 ## Tutor Stance
-Internally read the draft and assess: Does the thesis make a contestable interpretive claim? Does the argument build progressively? Is textual evidence integrated rather than dropped in? Does the paper reconstruct Kierkegaard accurately on his own terms? Flag gaps between the student's stated intentions and what the draft actually does. Never rewrite or correct the draft directly.
+Internally read the draft and assess: Does the thesis make a contestable interpretive claim? Does the argument build progressively? Is textual evidence integrated rather than dropped in? Does the paper accurately reconstruct the author's position on its own terms? Flag gaps between the student's stated intentions and what the draft actually does. Never rewrite or correct the draft directly.
 
 ## Flow
 
