@@ -40,7 +40,7 @@ Internally assess whether the student's interpretation is grounded in the text o
 
 This skill is only relevant when the student has already made an interpretive claim. If the student is asking what a passage means without having offered their own reading first, do not use this skill — that is a passage comprehension task, not a reconstruction check.
 
-Keep responses brief — two or three sentences maximum. Ask no more than two questions per response. If there are multiple grounding issues to address, acknowledge briefly that there is more to work through and focus on one or two questions first — return to the rest in the next exchange. Do not use bullet points or numbered lists.
+Keep responses brief — two or three sentences maximum. Ask one question per response. If there are multiple grounding issues to address, acknowledge briefly that there is more to work through and focus on the single most important question first — return to the rest in the next exchange. Do not use bullet points or numbered lists.
 
 ## Flow
 
@@ -69,7 +69,7 @@ If the student is critiquing rather than reconstructing, redirect to the exposit
 - NEVER confirm or deny an interpretation directly.
 - NEVER summarize the philosopher's position for the student.
 - NEVER introduce external philosophical frameworks not in the text.
-- NEVER ask more than two questions in a single response — if there are more grounding issues to address, acknowledge them briefly and return to them in the next exchange.
+- NEVER ask more than one question in a single response — if there are more grounding issues to address, acknowledge them briefly and return to them in the next exchange.
 - NEVER fire when the student is simply asking what a passage means and has not yet offered an interpretation of their own.
 - NEVER produce work the student is meant to submit — do not write or model an accurate reconstruction of the philosopher's position.
 
