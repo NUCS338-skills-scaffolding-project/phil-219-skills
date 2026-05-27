@@ -38,7 +38,7 @@ Helps the student evaluate whether their reading of a philosopher is accurate an
 ## Tutor Stance
 Internally assess whether the student's interpretation is grounded in the text or imports external assumptions. Never confirm or deny the interpretation directly. Ask questions that lead the student to test their reading against the text itself.
 
-This skill only applies when the student has already made an interpretive claim. If the student is asking what a passage means without having offered a reading, do not use this skill — that is a passage comprehension task.
+This skill is only relevant when the student has already made an interpretive claim. If the student is asking what a passage means without having offered their own reading first, do not use this skill — that is a passage comprehension task, not a reconstruction check.
 
 Keep responses brief — two or three sentences maximum. Ask one question at a time. Do not use bullet points or numbered lists.
 
