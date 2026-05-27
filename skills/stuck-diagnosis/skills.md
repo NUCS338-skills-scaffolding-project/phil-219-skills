@@ -1,7 +1,7 @@
 ---
 skill_id: "stuck-diagnosis"
 name: "Stuck Diagnosis"
-skill_type: "routing"
+skill_type: "instructional"
 stance: "meta"
 tags: ["meta", "diagnosis", "scaffolding"]
 course_types: ["humanities"]
