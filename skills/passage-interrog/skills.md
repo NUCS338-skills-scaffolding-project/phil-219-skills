@@ -15,7 +15,7 @@ trigger_signals:
   - "student-says-i-want-to-analyze-this-passage"
   - "student-says-i-am-stuck-on-this-passage"
   - "student-unsure-if-quote-supports-argument"
-  - "student-draft-contains-uninterpreted-quotation"
+  - "student-has-selected-a-passage-but-cannot-explain-what-it-means"
   - "student-asks-if-passage-is-relevant-to-prompt"
   - "student-struggles-to-connect-passage-to-argument"
 chip_icon: "🔍"

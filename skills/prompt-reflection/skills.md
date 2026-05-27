@@ -11,9 +11,9 @@ trigger_signals:
   - "session-winding-down"
   - "student-expressed-clarity"
   - "student-reached-stopping-point"
-  - "student-expressed-discouragement"
-  - "student-feeling-stuck"
-  - "student-doubting-progress"
+  - "student-expresses-clarity-or-breakthrough"
+  - "student-completes-a-significant-step"
+  - "student-says-i-think-i-understand-now"
 chip_icon: "🪞"
 version: "0.1.0"
 python_entry: logic.py

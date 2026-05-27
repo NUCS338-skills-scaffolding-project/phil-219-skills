@@ -13,7 +13,7 @@ trigger_signals:
   - "student-cites-quotation"
   - "student-says-this-proves"
   - "student-connecting-evidence-to-claim"
-  - "student-drops-quote-without-explanation"
+  - "student-drops-quote-in-conversation-without-explaining-it"
   - "student-uses-evidence-without-linking-to-argument"
   - "student-evaluates-before-explaining"
   - "student-expresses-agreement-or-disagreement-before-stating-authors-claim"
